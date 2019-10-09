@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring的约束定义 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 配置创建的对象:
+			id:待创建Bean的名称
+			class:待创建对象的路径
+			scope:待创建对象是单例 & 多例  (默认单例):(singleton & prototype)
+	-->
+	<!-- IOC容器的配置： 要创建的所有的对象都配置在这里
+		配置信息：
+			id:待创建Bean的名称
+			class:待创建对象的路径
+			scope:待创建对象是单例 & 多例  (默认单例):(singleton & prototype)
+			lazy-init:单例情况下是否采用懒加载方式(默认false):false & true
+			init-method:初始化方法，在创建对象之后执行该方法
+			destory-method:销毁方法，在调用容器的destory()方法执行该定义的方法
+	-->
+	<bean id="Bean_User" class="com._1_基本创建Bean对象" scope="singleton"
+		lazy-init="false" init-method="init_user" destroy-method="destroy_user"></bean>
+</beans>
+
+
+
+  

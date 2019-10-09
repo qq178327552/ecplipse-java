@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	创建Bean对象
+		1.通过无参构造器创建对象
+		2.通过带参构造器创建对象
+		3.通过工厂创建对象
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 2.1.创建一个字符串,为下文引用 -->
+	<bean id="str" class="java.lang.String">
+		<constructor-arg value="学生类"></constructor-arg>
+	</bean>
+	
+	<!-- 1.通过无参构造器创建对象 -->
+	<bean id="NoParaUser" class="test._2_createBean_constructor.Bean_User"></bean>
+	
+	<!-- 2.通过带参构造器创建对象 -->
+		<!-- 给参数赋值：
+			value(必填项):传入的值
+			index：不加该标签[constructor-arg]的位置不能写错，须对应，该标签用于判断带参位置，从0开始算
+			type：传入的数据类型
+			ref:引用类型
+		 -->
+	<bean id="ContainParaUser1" class="test._2_createBean_constructor.Bean_User">
+		<constructor-arg value="100"></constructor-arg>
+		<constructor-arg type="java.lang.String"  value="Jack"></constructor-arg>
+	</bean>
+	
+	<bean id="ContainParaUser2" class="test._2_createBean_constructor.Bean_User">
+		<constructor-arg index="0" value="100"></constructor-arg>
+		<constructor-arg index="1" value="Jack"></constructor-arg>
+	</bean>
+	
+	<bean id="ContainParaUser3" class="test._2_createBean_constructor.Bean_User">
+		<constructor-arg value="100"></constructor-arg>
+		<constructor-arg ref="str"></constructor-arg>
+	</bean>
+	
+	<!-- 3.通过工厂创建对象 -->
+	<!-- 3.1.先创建工厂 -->
+	<bean id="factory" class="test._2_createBean_constructor.Factory_CreateUserBean"></bean>
+	<!-- 3.2.再用id为factory的方法，去创建对应的对象 -->
+	<bean id="factory_NoParaUser" factory-bean="factory" factory-method="getInstance"></bean>
+	
+	<!-- 3.通过工厂类静态方法创建对象(不需创建工厂直接调用静态方法) -->
+	<bean id="factoryStatic_NoParaUser" class="test._2_createBean_constructor.Factory_CreateUserBean" factory-method="getStaticInstance"></bean>
+
+</beans>      
+
+
+
+  

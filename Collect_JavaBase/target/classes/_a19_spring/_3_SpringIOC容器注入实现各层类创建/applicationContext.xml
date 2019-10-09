@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	依赖注入开发-对象的创建
+		action|service|dao  各层用spring创建
+		
+		1.通过连接最终创建action对象
+		2.内部bean 方法创建userAction对象
+		3.p 名称空间通过set方法给对象的属性注入值(3.0以上版本才支持)
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 1.通过连接最终创建action对象 -->
+	<!-- dao 层对象(底层) -->
+	<bean id="userDao" class="test._3_assignBean_2_setClass.UserDao"></bean>
+	<!-- service 层对象(调用dao层) -->
+	<bean id="userService" class="test._3_assignBean_2_setClass.UserService">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- action 层对象(调用service层) -->
+	<bean id="refUserAction" class="test._3_assignBean_2_setClass.UserAction">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!-- 2.内部bean 方法创建userAction对象 -->
+	<bean id="includeUserAction" class="test._3_assignBean_2_setClass.UserAction">
+		<property name="userService">
+			<bean class="test._3_assignBean_2_setClass.UserService">
+				<property name="userDao">
+					<bean class="test._3_assignBean_2_setClass.UserDao"></bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<!-- 3.p 名称空间通过set方法给对象的属性注入值(3.0以上版本才支持)-->
+	<!-- 
+	<bean id="p_UserDao" class="test._3_assignBean_2.UserDao"></bean>
+	<bean id="p_UserService" class="test._3_assignBean_2.UserService" p:p_UserDao-ref="p_UserDao"></bean>
+	<bean id="p_UserAction" class="test._3_assignBean_2.UserAction" p:p_UserService-ref="p_UserService"></bean>
+ -->
+</beans>      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

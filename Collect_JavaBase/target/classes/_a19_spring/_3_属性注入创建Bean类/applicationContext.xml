@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	用Spring给对象中的属性赋值
+		1.通过构造函数给对象赋值
+		2.通过set方法注入属性
+		3.p 方法通过set注入值
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 
+		1.通过构造函数给对象赋值
+	 -->
+	<bean id="constructorUser" class="test._3_assignBean_1_setProp.Bean_User">
+		<constructor-arg value="100"></constructor-arg>
+	</bean>
+	
+	<!-- 2.通过set方法注入属性,spring识别的是set后的字符,且小写 -->
+	<bean id="setUser" class="test._3_assignBean_1_setProp.Bean_User">
+		<property name="name" value="Jack"></property>
+	</bean>
+
+	<!-- 3.p 方法通过set注入值 -->
+	<bean id="p_setUser" class="test._3_assignBean_1_setProp.Bean_User" p:id="100"></bean>
+</beans>      
+
+
+
+  

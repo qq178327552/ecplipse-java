@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+	自动装配类中的属性
+		1.根据名称自动装配(可设置全局或某个类)
+		2.根据类型自动装配
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"
+        default-autowire="byName">
+	<!-- 上面设置全局根据名称自动装配 -->
+	<bean id="userDao" class="test._4_auto.UserDao"></bean>	
+	<!-- 1.根据名称自动装配(userService类中的userDao属性与该配置文件中一个bean同名) -->
+	<bean id="userService" class="test._4_auto.UserService" autowire="byName"></bean>
+	<!-- 2.根据类型自动装配(userAction类中的userService属性的类型为：UserService,所以匹配与该配置文件中一个bean同类型的，此方法只能匹配唯一的bean，出现两个同类型的bean则报错) -->
+	<bean id="userAction" class="test._4_auto.UserAction" autowire="byType"></bean>
+</beans>
